@@ -170,8 +170,8 @@ class CatSolver:
       else:
         tmp_seiged, tmp_edges, tmp_other, tmp_deepth, _ = self.checkCatch(node,deepth)
       each_node.color = "yellow"
-      self.c.itemconfigure(each_node.Item,fill="grey")
-      self.grey.append(each_node)
+      # self.c.itemconfigure(each_node.Item,fill="grey")
+      # self.grey.append(each_node)
       if tmp_seiged:
         return [each_node]
       lft_edges = [a_node for a_node in tmp_edges if a_node in edges]
@@ -253,46 +253,6 @@ class CatSolver:
       a_path.append(bestNode)
       # pdb.set_trace()
       return (bestValue, a_path)
-
-  # def solve(self,node):
-  #   seiged, edges, other, deepth = self.checkCatch(node)
-  #   all_nodes = edges+other
-  #   all_nodes.sort(key=lambda a_node: a_node.Score, reverse=True)
-  #   if len(all_nodes)>10:
-  #     examine_nodes = all_nodes[0:10]
-  #   else:
-  #     examine_nodes = all_nodes
-  #   edges.sort(key=lambda a_node: a_node.EdgePoint)
-  #   for idx, each_node in enumerate(edges):
-  #     if idx == 0:
-  #       ref_score = each_node.EdgePoint
-  #       if ref_score <=3:
-  #         if not each_node in examine_nodes:
-  #           examine_nodes.append(each_node)
-  #       examine_nodes += [x for x in each_node.Neighboors if x in all_nodes and \
-  #           (not x in examine_nodes) and (not x.Edge)]
-  #     else:
-  #       if each_node.EdgePoint > ref_score:
-  #         break
-  #       else:
-  #         if ref_score <=3:
-  #           if not each_node in examine_nodes:
-  #             examine_nodes.append(each_node)
-  #         examine_nodes += [x for x in each_node.Neighboors if x in all_nodes and \
-  #             (not x in examine_nodes) and (not x.Edge)]
-  #   bestnode = []
-  #   bestscore = 0
-  #   for each_node in examine_nodes:
-  #     each_node.color = "black"
-  #     score = self.updateDistance(node,True)
-  #     each_node.color = "yellow"
-  #     if score > bestscore:
-  #       bestscore = score
-  #       bestnode = [each_node]
-  #     elif score == bestscore:
-  #       bestnode.append(each_node)
-  #   bestnode.sort(key=lambda a_node: a_node.Score)
-  #   return bestnode
 
   def checkCatch(self,node,ref = 0):
     # start_time = time.clock()
