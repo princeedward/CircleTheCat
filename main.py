@@ -208,16 +208,16 @@ class CatSolver:
         if has_a_node:
           player_node.color = "yellow"
         if cat_node.Edge:
-          return (edges*RESIZE_FACTOR + other + 1000, [])
+          return (len(edges)*RESIZE_FACTOR + len(other) + 1000, [])
         else:
-          return (edges*RESIZE_FACTOR + other, [])
+          return (len(edges)*RESIZE_FACTOR + len(other), [])
     else:
       if depth == 0:  # player
         _, edges, other, deepth, _ = self.checkCatch(cat_node,BFS_DEPTH)
         if cat_node.Edge:
-          return (edges*RESIZE_FACTOR + other + 1000, [player_node])
+          return (len(edges)*RESIZE_FACTOR + len(other) + 1000, [player_node])
         else:
-          return (edges*RESIZE_FACTOR + other, [player_node])
+          return (len(edges)*RESIZE_FACTOR + len(other), [player_node])
     if maximizingPlayer:  # cat
       bestValue = -1
       seiged = True
