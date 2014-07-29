@@ -241,8 +241,9 @@ class CatSolver:
         return (bestValue, a_path)
     else:                 # player
       bestValue = -1
-      _, tmp_edges, tmp_other, deepth, _ = self.checkCatch(cat_node,BFS_DEPTH)
-      for each_child in reversed(tmp_other+tmp_edges):
+      tmp_edges, tmp_other, deepth = self.returnCandiates(cat_node,BFS_DEPTH)
+      print "Searched_nodes: ", len(tmp_other)
+      for each_child in reversed(tmp_other):
         (score, a_path) = self.minMax(cat_node,each_child,depth-1,True,bestValue)
         if score <= track_val and track_val != -1:
           a_path.append(each_child)
@@ -253,6 +254,51 @@ class CatSolver:
       a_path.append(bestNode)
       # pdb.set_trace()
       return (bestValue, a_path)
+
+  def returnCandiates(self,node,ref = 0):
+    edge_points = []
+    frontier = [node]
+    secondary = []
+    finished = []
+    levels = []
+    level = 0
+    while len(frontier)>0 and len(edge_points)==0:
+      levels.append(frontier)
+      for each_node in frontier:
+        for each_other_node in each_node.Neighboors:
+          if each_other_node.color != "black" and not each_other_node.Edge and \
+              (not each_other_node in finished+frontier+secondary):
+            secondary.append(each_other_node)
+          elif each_other_node.color != "black" and each_other_node.Edge and \
+              (not each_other_node in edge_points):
+            edge_points.append(each_other_node)
+      if len(edge_points)>0:
+        levels.append(edge_points)
+      level += 1
+      finished += frontier
+      frontier = secondary
+      secondary = []
+    if len(edge_points)==0:
+      if finished[0] == node:
+        del finished[0]
+      return (edge_points,finished,level-1)
+    else:
+      frontier = levels[-1]
+      secondary = []
+      level_ev = len(levels) - 2
+      finished = []
+      while level_ev >= 0:
+        for each_node in frontier:
+          for every_node in each_node.Neighboors:
+            if every_node in levels[level_ev] and (not every_node in secondary):
+              secondary.append(every_node)
+        if level_ev < ref:
+          finished += frontier
+        frontier = secondary
+        secondary = []
+        level_ev -= 1
+      return (edge_points,finished,level-1)
+
 
   def checkCatch(self,node,ref = 0):
     # start_time = time.clock()
