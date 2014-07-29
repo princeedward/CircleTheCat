@@ -8,9 +8,11 @@ This is a MiniMax algorithm implementation for the circle the cat game, which is
 A snapshoot of the original game and my python gui are showed below.
 
 ![circle the cat flash game snapshoot](https://github.com/princeedward/CircleTheCat/blob/master/resource/GameSnap.PNG)
+
 **circle the cat flash game snapshoot**
 
 ![python solver gui snapshoot](https://github.com/princeedward/CircleTheCat/blob/master/resource/GuiSnap.PNG)
+
 **python solver gui snapshoot**
 
 ##How to Use
